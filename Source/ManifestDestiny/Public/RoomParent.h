@@ -15,6 +15,13 @@ public:
 	// Sets default values for this actor's properties
 	ARoomParent();
 
+	UPROPERTY(BlueprintReadWrite)
+		FVector HitLoc;
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+		void PlayerHit();
+	//void RayHit_Imp1lementation(UMaterialInstanceDynamic* WallMAT);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

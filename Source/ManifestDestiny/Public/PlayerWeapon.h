@@ -6,6 +6,14 @@
 #include "GameFramework/Actor.h"
 #include "PlayerWeapon.generated.h"
 
+UENUM(BlueprintType)
+enum class WeaponType : uint8
+{
+	RaycastWeapon,
+	SpawnWeapon,
+	FlamerWeapon
+};
+
 UCLASS()
 class MANIFESTDESTINY_API APlayerWeapon : public AActor
 {
@@ -14,6 +22,18 @@ class MANIFESTDESTINY_API APlayerWeapon : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APlayerWeapon();
+
+	UFUNCTION(BlueprintCallable, Category = "CodedWeapon")
+		void FireWeapon();
+
+	UPROPERTY(BlueprintReadWrite)
+		WeaponType type;
+
+	UPROPERTY(BlueprintReadWrite)
+		float range;
+	UPROPERTY(BlueprintReadWrite)
+		UStaticMeshComponent* FirePoint;
+
 
 protected:
 	// Called when the game starts or when spawned
