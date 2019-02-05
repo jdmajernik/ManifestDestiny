@@ -13,6 +13,14 @@ enum class WeaponType : uint8
 	SpawnWeapon,
 	FlamerWeapon
 };
+UENUM(BlueprintType)
+enum class WeaponState : uint8
+{
+	Idle,
+	SpoolUp,
+	Firing
+};
+
 
 UCLASS()
 class MANIFESTDESTINY_API APlayerWeapon : public AActor
@@ -25,6 +33,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "CodedWeapon")
 		void FireWeapon();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+		void FireParticles();
+
+	void FireParticles_Implementation();
 
 	UPROPERTY(BlueprintReadWrite)
 		WeaponType type;
@@ -33,6 +45,10 @@ public:
 		float range;
 	UPROPERTY(BlueprintReadWrite)
 		UStaticMeshComponent* FirePoint;
+	UPROPERTY(BlueprintReadWrite)
+		WeaponState state;
+
+
 
 
 protected:
