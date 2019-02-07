@@ -47,6 +47,11 @@ public:
 		UStaticMeshComponent* FirePoint;
 	UPROPERTY(BlueprintReadWrite)
 		WeaponState state;
+	UPROPERTY(BlueprintReadOnly)
+		TWeakObjectPtr<AActor> closestActor;
+	UPROPERTY(BlueprintReadOnly)
+		FVector EnemyHitLoc;
+
 
 
 

@@ -18,7 +18,7 @@ APlayerWeapon::APlayerWeapon()
 
 void APlayerWeapon::FireWeapon()
 {
-	EnemyHitLoc = FVector(0, 0, 0);
+	
 
 	TArray<FHitResult> outHit;
 	
@@ -59,7 +59,7 @@ void APlayerWeapon::FireWeapon()
 				{
 					FVector enemyLoc = hit.Actor->GetActorLocation();
 
-					
+					//DrawDebugLine(GetWorld(), playerLoc, enemyLoc, FColor::Red, false, 10, 0, 4);
 
 					FVector a = enemyLoc - playerLoc;
 					a.Normalize();
@@ -67,41 +67,26 @@ void APlayerWeapon::FireWeapon()
 
 					if (GEngine)
 					{
-						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::SanitizeFloat(dotProd));
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, hit.ImpactPoint.ToString());
 					}
 
 					//checks if the actor is in range
 					if (dotProd > 0.45 && dotProd < 1.35)
 					{
-						
 						if (!closestActor.IsValid())
 						{
 							closestActor = hit.Actor;
 							closestDotProd = dotProd;
-							EnemyHitLoc = hit.ImpactPoint;
-							if (GEngine)
-							{
-								GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, hit.ImpactPoint.ToString());
-							}
+							
 							//DrawDebugLine(GetWorld(), playerLoc, enemyLoc, FColor::Emerald, false, 0.3, -1, 10);
-						}
-						else if (hit.Actor == closestActor)
-						{
-							EnemyHitLoc = hit.ImpactPoint;
-							//DrawDebugLine(GetWorld(), playerLoc, enemyLoc, FColor::Emerald, false, 0.2, -1, 10);
 						}
 						else
 						{
-							
 							if (abs(.9 - dotProd) > abs(0.9 - closestDotProd))
 							{
 								closestActor = hit.Actor;
 								closestDotProd = dotProd;
 								EnemyHitLoc = hit.ImpactPoint;
-								if (GEngine)
-								{
-									GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, hit.ImpactPoint.ToString());
-								}
 								//DrawDebugLine(GetWorld(), playerLoc, enemyLoc, FColor::Emerald, false, 0.2, -1, 10);
 							}
 						}
