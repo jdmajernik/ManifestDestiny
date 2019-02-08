@@ -20,6 +20,7 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 		void PlayerHit();
+
 	//void RayHit_Imp1lementation(UMaterialInstanceDynamic* WallMAT);
 
 protected:
